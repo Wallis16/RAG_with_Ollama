@@ -4,9 +4,9 @@ from sentence_transformers import SentenceTransformer
 
 import chainlit as cl
 
-ST = SentenceTransformer("mixedbread-ai/mxbai-embed-large-v1")
+ST = SentenceTransformer("all-mpnet-base-v2")
 
-dataset = load_dataset("not-lain/wikipedia",revision = "embedded")
+dataset = load_dataset("diogenes-wallis/20220301_simple_100_all_mpnet_base_v2",revision = "embedded")
 data = dataset["train"]
 data = data.add_faiss_index("embeddings") 
 
