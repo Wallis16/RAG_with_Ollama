@@ -14,7 +14,7 @@ SYS_PROMPT = """You are an assistant for answering questions.
 You are given the extracted parts of a long document and a question. Provide a conversational answer.
 If you don't know the answer, just say "I do not know." Don't make up an answer."""
 
-url = 'http://localhost:11434/api/chat'
+url = 'http://localhost:7869/api/chat'
 
 headers = {
         'Content-Type': 'application/json'

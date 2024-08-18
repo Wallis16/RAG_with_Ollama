@@ -5,4 +5,5 @@ def search(ST, data, query, k):
         "embeddings", embedded_query, # compare our new embedded query with the dataset embeddings
         k=k # get only top k results
     )
+
     return scores, retrieved_examples

@@ -7,11 +7,11 @@ def format_prompt(prompt,retrieved_documents,k):
   """using the retrieved documents we will prompt the model to generate our responses"""
   PROMPT = f"Question:{prompt}\nContext:"
   for idx in range(k) :
-    PROMPT+= f"{retrieved_documents['text'][idx]}\n"
+    PROMPT+= f"\n\n{retrieved_documents['text'][idx][:1000]}\n\n"
   return PROMPT
 
 def generate(formatted_prompt, SYS_PROMPT, payload, url, headers):
-  formatted_prompt = formatted_prompt[:2000]
+  # formatted_prompt = formatted_prompt[:2000]
   messages = f"{SYS_PROMPT} \n \n {formatted_prompt}"
   print(messages)
   payload['messages'][0]['content'] = messages

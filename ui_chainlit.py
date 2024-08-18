@@ -1,18 +1,41 @@
-from rag import rag
 from datasets import load_dataset
 from sentence_transformers import SentenceTransformer
+from rag.rag_functions import rag_chatbot
 
 import chainlit as cl
 
 ST = SentenceTransformer("all-mpnet-base-v2")
 
-dataset = load_dataset("diogenes-wallis/20220301_simple_100_all_mpnet_base_v2",revision = "embedded")
+hub_path = "diogenes-wallis/wikipedia-all-countries"
+dataset = load_dataset(hub_path, revision = "embedded")
 data = dataset["train"]
-data = data.add_faiss_index("embeddings") 
+data = data.add_faiss_index("embeddings")
+
+SYS_PROMPT = """You are an assistant for answering questions.
+You are given the extracted parts of a long document and a question. Provide a conversational answer.
+If you don't know the answer, just say "I do not know." Don't make up an answer."""
+
+url = 'http://localhost:7869/api/chat'
+
+headers = {
+        'Content-Type': 'application/json'
+    }
+
+payload = {
+        'model': 'phi3:mini',
+        'messages': [
+            {
+                'role': 'user',
+                'content': ''
+            }
+        ]
+    }
+
+k = 5
 
 @cl.step(type="tool")
 async def tool(message):
-    output = rag.rag_chatbot(ST, data, message)
+    output = rag_chatbot(ST, data, SYS_PROMPT, message, k, payload, url, headers)
     return output["content"]
 
 @cl.on_message  # this function will be called every time a user inputs a message in the UI
