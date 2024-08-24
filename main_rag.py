@@ -35,7 +35,7 @@ dataset = load_dataset(hub_path, revision = "embedded")
 data = dataset["train"]
 data = data.add_faiss_index("embeddings")
 
-prompt = "What is the best European country?"
-k = 5
+prompt = "What are the best countries for living?"
+k = 3
 
 print(rag_chatbot(ST, data, SYS_PROMPT, prompt, k, payload, url, headers))

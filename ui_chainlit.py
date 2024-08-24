@@ -31,7 +31,7 @@ payload = {
         ]
     }
 
-k = 5
+k = 2
 
 @cl.step(type="tool")
 async def tool(message):
