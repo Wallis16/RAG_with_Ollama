@@ -8,4 +8,4 @@ docker compose up -d
 
 chainlit run ui_chainlit.py
 
-![alt text](image.png)
+![alt text](usage/image.png)
